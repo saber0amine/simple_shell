@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	{
 		if (isatty(STDIN_FILENO))
 			write(1, "$ ", 2);
-		n_chars = getline(&command, &buffer_size, stdin);
+		n_chars = _getline(&command, &buffer_size, stdin);
 		_EOF(n_chars, command);
 		command[n_chars - 1] = '\0';
 		_trim(command);

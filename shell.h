@@ -40,7 +40,9 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int _strncmp(char *fstr, char *sstr, int n);
 
-ssize_t _getline(char **bufferptr, size_t *buf_size, FILE *stream);
+/*ssize_t _getline(char **bufferptr, size_t *buf_size, FILE *stream);*/
+#define READ_BUF_SIZE 1024
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int _oldsize, unsigned int _newsize);
 void assign_buf(char **buf_ptr, size_t *size_bufp, char *buf, size_t size_buf);
 
