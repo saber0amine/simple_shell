@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	char **array = NULL, *command = NULL;
 	size_t buffer_size = 0;
 	ssize_t n_chars = 0;
-	int status = EXIT_SUCCESS;
+	int status = 0;
 	(void)argc, (void)argv;
 
 	while (1)
