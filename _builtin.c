@@ -28,6 +28,11 @@ int run_builtin(char **array, char *command)
 		unset_builtin(array);
 		return (1);
 	}
+	if (strcmp(array[0], "cd") == 0)
+	{
+		cd_builtin(array);
+		return (1);
+	}
 	return (0);
 }
 
