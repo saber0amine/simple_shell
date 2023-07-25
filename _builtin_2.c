@@ -75,15 +75,15 @@ void cd_builtin(char **array)
 		return;
 	}
 
-	printf("Before change_dir:\n");
+	/*printf("Before change_dir:\n");
 	printf("PWD: %s\n", _getenv("PWD"));
-	printf("OLDPWD: %s\n", _getenv("OLDPWD"));
+	printf("OLDPWD: %s\n", _getenv("OLDPWD"));*/
 
 	change_dir(target_dir);
 
-	printf("After change_dir:\n");
+	/*printf("After change_dir:\n");
 	printf("PWD: %s\n", _getenv("PWD"));
-	printf("OLDPWD: %s\n", _getenv("OLDPWD"));
+	printf("OLDPWD: %s\n", _getenv("OLDPWD"));*/
 
 	/*if (setenv("OLDPWD", oldpwd, 1) != 0)
 		perror("setenv");*/
