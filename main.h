@@ -63,8 +63,6 @@ void Execute(data *d);
 char *_trouveEnv(char *name);
 int _functionWich(data *d);
 int setenvFunction(data *d, char *name, char *value);
-
-/* string_utils.c */
 unsigned int _strlen(char *str);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
