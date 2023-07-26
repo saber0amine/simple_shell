@@ -80,7 +80,7 @@ void cd_builtin(char **array)
 		return;
 	}
 	change_dir(target_dir);
-	if (strcmp(array[1], "-") == 0)
+	if (array[1] != NULL && strcmp(array[1], "-") == 0)
 	{
 		write(STDOUT_FILENO, target_dir, strlen(target_dir));
 		write(STDOUT_FILENO, "\n", 1);
