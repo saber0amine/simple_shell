@@ -13,6 +13,7 @@ int exec_builtin(data *d)
 		{"setenv", builtin_setenv},
 		{"unsetenv", builtin_unsetenv},
 		{"cd", builtin_cd},
+		{"echo", echo_builtin},
 		{NULL, NULL},
 	};
 	int i = 0;
