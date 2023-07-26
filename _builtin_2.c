@@ -69,5 +69,9 @@ void cd_builtin(char **array)
 		return;
 	}
 	change_dir(target_dir);
+	if (strcmp(array[1], "-") == 0)
+	{
+		printf("%s\n", target_dir);
+	}
 	free(oldpwd);
 }
