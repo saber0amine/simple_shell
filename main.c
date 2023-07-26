@@ -8,10 +8,10 @@
  */
 int main(int argc, char **argv)
 {
-	data d;
-	(void)argc;
-	init_data(&d, argv[0]);
-	_exec(&d);
+        data d;
+        (void)argc;
+        initDataFunc(&d, argv[0]);
+        Execute(&d);
 
-	return (0);
+        return (0);
 }
