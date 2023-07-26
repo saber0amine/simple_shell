@@ -57,8 +57,6 @@ void InterpretCmd(data *d);
 void _perror(const char *str1, const char *str2);
 void _functionTrimage(char *str);
 void *_memoryRealloc(void *ptr, unsigned int new_size);
-
-/* exec.c */
 void debutDeProcess(data *d);
 void signeEviter(int sig);
 void Execute(data *d);
