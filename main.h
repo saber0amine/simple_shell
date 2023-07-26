@@ -71,10 +71,7 @@ char *_strcat(char *dest, const char *src);
 char *_strdup(const char *str);
 int Cnum(const char *status);
 int Cdigit(int c);
-
-/* _getline.c */
 #define BufferSize 1024
-
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 
