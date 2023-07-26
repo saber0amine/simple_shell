@@ -29,7 +29,7 @@ char *create_new_entry(char *name, char *value);
 void unset_builtin(char **array);
 void set_builtin(char **array);
 void cd_builtin(char **array);
-
+int echo_builtin(char **array);
 void free_array(char **array);
 void _trim(char *str);
 int _isnumber(const char *status);

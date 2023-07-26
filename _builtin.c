@@ -33,6 +33,11 @@ int run_builtin(char **array, char *command)
 		cd_builtin(array);
 		return (1);
 	}
+	if (strcmp(array[0], "echo") == 0)
+	{
+		echo_builtin(array);
+		return (1);
+	}
 	return (0);
 }
 
