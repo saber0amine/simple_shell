@@ -21,7 +21,7 @@ extern char **environ;
  * @cmd: The user input, the command line
  * @shell_name: The name of the shell program
  * @last_exit_status: last exit status of last command executed
- * @flag_setenv: 1 if user did exec setenv (use it to free memory)
+ * @flagsetenvFunction: 1 if user did exec setenv (use it to free memory)
  */
 typedef struct data
 {
@@ -29,68 +29,53 @@ typedef struct data
 	char *cmd;
 	const char *shell_name;
 	int last_exit_status;
-	int flag_setenv;
+	int flagsetenvFunction;
 } data;
 
 /**
- * struct builtin - holds the main data.
+ * struct ObjectBuilt - holds the main data.
  * @cmd: built in cmd
  * @f: function of builtin cmd
  */
-typedef struct builtin
+typedef struct ObjectBuilt
 {
 	const char *cmd;
 	void (*f)(data *d);
-} builtin;
+} ObjectBuilt;
 
-/* builtin.c */
-int exec_builtin(data *d);
-void builtin_exit(data *d);
-void builtin_env(data *d);
-void builtin_setenv(data *d);
-void builtin_unsetenv(data *d);
+int exectuteFunc(data *d);
+void exitFunc(data *d);
+void envFunc(data *d);
+void setEnvFunc(data *d);
+void unsetEnvFunc(data *d);
 void builtin_cd(data *d);
 void echo_builtin(data *d);
 
 
 /* helpers.c */
 void _printf(const char *str);
-void free_array(char **array);
-void split(data *d, const char *delim);
-void init_data(data *d, const char *shell_name);
-void read_cmd(data *d);
-
-/* helpers2.c */
+void cleanUpArray(char **array);
+void splitFunc(data *d, const char *delim);
+void initDataFunc(data *d, const char *shell_name);
+void InterpretCmd(data *d);
 void _perror(const char *str1, const char *str2);
-void _trim(char *str);
-void *_realloc(void *ptr, unsigned int new_size);
-
-/* exec.c */
-void start_process(data *d);
-void handler_sigint(int sig);
-void _exec(data *d);
-
-/* path.c */
-char *_getenv(char *name);
-int _which(data *d);
-int _setenv(data *d, char *name, char *value);
-
-/* string_utils.c */
+void _functionTrimage(char *str);
+void *_memoryRealloc(void *ptr, unsigned int new_size);
+void debutDeProcess(data *d);
+void signeEviter(int sig);
+void Execute(data *d);
+char *_trouveEnv(char *name);
+int _functionWich(data *d);
+int setenvFunction(data *d, char *name, char *value);
 unsigned int _strlen(char *str);
 int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
 char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
-
-
-/* string_utils2.c */
 char *_strdup(const char *str);
-int _isnumber(const char *status);
-int _isdigit(int c);
-
-/* _getline.c */
-#define READ_BUF_SIZE 1024
-
+int Cnum(const char *status);
+int Cdigit(int c);
+#define BufferSize 1024
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 
