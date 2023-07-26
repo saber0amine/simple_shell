@@ -60,8 +60,6 @@ void *_memoryRealloc(void *ptr, unsigned int new_size);
 void debutDeProcess(data *d);
 void signeEviter(int sig);
 void Execute(data *d);
-
-/* path.c */
 char *_trouveEnv(char *name);
 int _functionWich(data *d);
 int setenvFunction(data *d, char *name, char *value);
