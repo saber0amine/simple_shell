@@ -49,15 +49,11 @@ void envFunc(data *d);
 void setEnvFunc(data *d);
 void unsetEnvFunc(data *d);
 void builtin_cd(data *d);
-
-
 void _printf(const char *str);
 void cleanUpArray(char **array);
 void splitFunc(data *d, const char *delim);
 void initDataFunc(data *d, const char *shell_name);
 void InterpretCmd(data *d);
-
-/* helpers2.c */
 void _perror(const char *str1, const char *str2);
 void _functionTrimage(char *str);
 void *_memoryRealloc(void *ptr, unsigned int new_size);
