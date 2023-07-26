@@ -51,7 +51,6 @@ void unsetEnvFunc(data *d);
 void builtin_cd(data *d);
 
 
-/* helpers.c */
 void _printf(const char *str);
 void cleanUpArray(char **array);
 void splitFunc(data *d, const char *delim);
