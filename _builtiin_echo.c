@@ -48,7 +48,6 @@ char *_itoa(int num)
 /**
  * handle_echo_args - handles the $ builtin
  * @tokens: array of strings
- * @status: exit status
  */
 
 void handle_echo_args(char *tokens)
@@ -89,9 +88,8 @@ void handle_echo_args(char *tokens)
 }
 
 /**
- * handle_echo - handles the echo builtin with '"'
- * @tokens: array of strings
- * @status: exit status
+ * echo_builtin - handles the echo builtin with '"'
+ * @array: array of strings
  * Return: 1 if the command is a builtin, 0 if not
  */
 
