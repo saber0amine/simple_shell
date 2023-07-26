@@ -8,6 +8,10 @@
 void change_dir(char *target_dir)
 {
 	char *pwd = getcwd(NULL, 0);
+	char error_msg[100];
+	const char *prefix = "./hsh: 1: cd: can't cd to ";
+	int i, j;
+	const char *suffix = "\n";
 
 	if (pwd == NULL)
 	{
@@ -17,7 +21,14 @@ void change_dir(char *target_dir)
 
 	if (chdir(target_dir) == -1)
 	{
-		perror("chdir");
+		for (i = 0; prefix[i] != '\0'; i++)
+			error_msg[i] = prefix[i];
+		for (j = 0; target_dir[j] != '\0'; j++, i++)
+			error_msg[i] = target_dir[j];
+		for (j = 0; suffix[j] != '\0'; j++, i++)
+			error_msg[i] = suffix[j];
+		error_msg[i] = '\0';
+		write(STDERR_FILENO, error_msg, i);
 		free(pwd);
 		return;
 	}
