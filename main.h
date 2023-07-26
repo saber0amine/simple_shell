@@ -68,9 +68,6 @@ int _strcmp(const char *s1, const char *s2);
 int _strncmp(const char *s1, const char *s2, int n);
 char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
-
-
-/* string_utils2.c */
 char *_strdup(const char *str);
 int Cnum(const char *status);
 int Cdigit(int c);
