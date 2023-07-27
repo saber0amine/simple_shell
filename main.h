@@ -50,6 +50,7 @@ void builtin_env(data *d);
 void builtin_setenv(data *d);
 void builtin_unsetenv(data *d);
 void builtin_cd(data *d);
+void echo_builtin(data *d);
 
 
 /* helpers.c */

@@ -5,7 +5,7 @@
  * @d: data struct input
  * Return: void
  */
-void builtin_cd(data *d)
+/*void builtin_cd(data *d)
 {
 	char *dir = d->av[1];
 	char cwd[256];
@@ -24,4 +24,4 @@ void builtin_cd(data *d)
 			perror("getcwd() error");
 		_setenv(d, "PWD", cwd);
 	}
-}
+}*/
