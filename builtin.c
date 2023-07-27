@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
- * exec_builtin - check if built in and then exec
- * @d: data struct input
+ * exec_builtin - is the function that run the builtin functions
+ * @d: is the data
  * Return: 1 if built in, 0 if not
  */
 int exec_builtin(data *d)
 {
 	builtin builtin[] = {
-		{"exit", builtin_exit},
-		{"env", builtin_env},
-		{"setenv", builtin_setenv},
-		{"unsetenv", builtin_unsetenv},
-		{"cd", builtin_cd},
+		{"exit", exit_builtin},
+		{"env", env_builtin},
+		{"setenv", setenv_builtin},
+		{"unsetenv", unsetenv_builtin},
+		{"cd", cd_builtin},
 		{"echo", echo_builtin},
 		{NULL, NULL},
 	};
@@ -30,13 +30,13 @@ int exec_builtin(data *d)
 }
 
 /**
- * builtin_exit - exits the shell
- * @d: data struct input
+ * exit_builtin - is the fucntion to exit the shell
+ * @d: is the data
  * Return: void
  */
-void builtin_exit(data *d)
+void exit_builtin(data *d)
 {
-	const char *errorString = "./hsh: 1: exit: Illegal number: ";
+	const char *errstr = "./hsh: 1: exit: Illegal number: ";
 
 	if (d->av[1])
 	{
@@ -44,7 +44,7 @@ void builtin_exit(data *d)
 			d->last_exit_status = atoi(d->av[1]);
 		else
 		{
-			write(STDERR_FILENO, errorString, strlen(errorString));
+			write(STDERR_FILENO, errstr, strlen(errstr));
 			write(STDERR_FILENO, d->av[1], strlen(d->av[1]));
 			write(STDERR_FILENO, "\n", 1);
 			d->last_exit_status = 2;
@@ -58,11 +58,11 @@ void builtin_exit(data *d)
 }
 
 /**
- * builtin_env - prints the current environment
- * @d: data struct input
+ * env_builtin - is the function that prints the environment
+ * @d: is the data
  * Return: void
  */
-void builtin_env(data *d)
+void env_builtin(data *d)
 {
 	int i = 0;
 
@@ -75,13 +75,12 @@ void builtin_env(data *d)
 	}
 }
 /**
- * builtin_setenv - Initialize a new environment variable,
- * or modify an existing one
- * @d: data struct input
+ * setenv_builtin - is the function that add a environment variable
+ * @d: is the data
  * Return: void
  */
 
-void builtin_setenv(data *d)
+void setenv_builtin(data *d)
 {
 	(void)d;
 	if (d->av[1] && d->av[2])
@@ -94,11 +93,11 @@ void builtin_setenv(data *d)
 }
 
 /**
- * builtin_unsetenv - Remove an environment variable
- * @d: data struct input
+ * unsetenv_builtin - is the functioin that remove an environment variable
+ * @d: is the data
  * Return: void
  */
-void builtin_unsetenv(data *d)
+void unsetenv_builtin(data *d)
 {
 	int i, j;
 	int len;

@@ -1,6 +1,12 @@
 #include "main.h"
 
-char *_itoa(int num)
+/**
+ * _inttostr - is the function that conver from int to string
+ * @num: is the int we want to convert
+ * Return: return the string
+ */
+
+char *_inttostr(int num)
 {
 	int i = 0, j = 0, k = 0, l = 0, m = 0;
 	char *str = NULL;
@@ -39,7 +45,13 @@ char *_itoa(int num)
 	return (str);
 }
 
-void handle_echo_args(char *tokens, int status)
+/**
+ * echo_args - is the function that handel $
+ * @tokens: is a string
+ * @status: is the exit status
+ */
+
+void echo_args(char *tokens, int status)
 {
 	char *value = NULL;
 
@@ -60,7 +72,7 @@ void handle_echo_args(char *tokens, int status)
 	}
 	if (_strncmp(tokens, "$$", 2) == 0)
 	{
-		value = _itoa(getpid());
+		value = _inttostr(getpid());
 		write(STDOUT_FILENO, value, _strlen(value));
 		write(STDOUT_FILENO, "\n", 1);
 		free(value);
@@ -68,8 +80,7 @@ void handle_echo_args(char *tokens, int status)
 	}
 	if (_strncmp(tokens, "$?", 2) == 0)
 	{
-		value = _itoa(status);
-		/*write(STDOUT_FILENO, _getenv("?"), _strlen(_getenv("?")));*/
+		value = _inttostr(status);
 		write(STDOUT_FILENO, value, _strlen(value));
 		write(STDOUT_FILENO, "\n", 1);
 		free(value);
@@ -78,6 +89,11 @@ void handle_echo_args(char *tokens, int status)
 	write(STDOUT_FILENO, "\n", 1);
 }
 
+/**
+ * echo_builtin - is the function that builtin echo
+ * @d: is the data
+ */
+
 void echo_builtin(data *d)
 {
 	int i = 1, flag = 0, j = 0;
@@ -85,7 +101,6 @@ void echo_builtin(data *d)
 	if (d->av[1] == NULL)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		return;
 	}
 	if (_strncmp(d->av[0], "echo", 4) != 0)
 		return;
@@ -94,12 +109,11 @@ void echo_builtin(data *d)
 		if (d->av[1] == NULL)
 		{
 			write(STDOUT_FILENO, "\n", 1);
-			return;
 		}
-		if (_strncmp(d->av[1], "$", 1) == 0 || _strncmp(d->av[1], "$$", 2) == 0 || _strncmp(d->av[1], "$?", 2) == 0)
+		if (_strncmp(d->av[1], "$", 1) == 0 || _strncmp(d->av[1], "$$", 2) == 0
+				|| _strncmp(d->av[1], "$?", 2) == 0)
 		{
-			handle_echo_args(d->av[1], d->last_exit_status);
-			return;
+			echo_args(d->av[1], d->last_exit_status);
 		}
 		for (i = 1; d->av[i] != NULL; i++)
 		{
@@ -108,7 +122,7 @@ void echo_builtin(data *d)
 				if (d->av[i][j] == '$')
 				{
 					flag = 1;
-					handle_echo_args(d->av[i] + j, d->last_exit_status);
+					echo_args(d->av[i] + j, d->last_exit_status);
 					break;
 				}
 				if (d->av[i][j] != '"')

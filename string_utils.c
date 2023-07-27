@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * _strlen - return the nbr of char in str
- * @str: string input
- * Return: nbr of char in str.
+ * _strlen - this function return length of a string
+ * @str: the string
+ * Return: len of string.
  */
 
 unsigned int _strlen(char *str)
@@ -17,27 +17,21 @@ unsigned int _strlen(char *str)
 
 
 /**
- * _strcmp - compares two strings.
- *
- * @s1: input const string
- * @s2: input const string
- *
- * Return: returns an integer indicating the result of the comparison,
- *	as follows:
- *		• 0, if the s1 and s2 are equal
- *		• a negative value if s1 is less than s2
- *		• a positive value if s1 is greater than s2
+ * _strcmp - this function compares two strings.
+ * @str1: string 1
+ * @str2: string 2
+ * Return: the result
  */
-int _strcmp(const char *s1, const char *s2)
+int _strcmp(const char *str1, const char *str2)
 {
 	int i;
 	int res = 0;
 
-	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
+	for (i = 0; str1[i] != '\0' && str2[i] != '\0'; i++)
 	{
-		if (s1[i] != s2[i])
+		if (str1[i] != str2[i])
 		{
-			res = s1[i] - s2[i];
+			res = str1[i] - str2[i];
 			break;
 		}
 	}
@@ -46,31 +40,25 @@ int _strcmp(const char *s1, const char *s2)
 }
 
 /**
- * _strncmp - compares two strings.
- *
- * @s1: input const string
- * @s2: input const string
- * @n: input int
- *
- * Return: returns an integer indicating the result of the comparison,
- *	as follows:
- *		• 0, if the s1 and s2 are equal
- *		• a negative value if s1 is less than s2
- *		• a positive value if s1 is greater than s2
+ * _strncmp - this function compares two strings with a number
+ * @str1: string 1
+ * @str2: string 2
+ * @n: how many char you want compare
+ * Return: the result
  */
-int _strncmp(const char *s1, const char *s2, int n)
+int _strncmp(const char *str1, const char *str2, int n)
 {
 	int i;
 	int res = 0;
 
-	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
+	for (i = 0; str1[i] != '\0' && str2[i] != '\0'; i++)
 	{
 
 		if (i >= n)
 			break;
-		if (s1[i] != s2[i])
+		if (str1[i] != str2[i])
 		{
-			res = s1[i] - s2[i];
+			res = str1[i] - str2[i];
 			break;
 		}
 	}

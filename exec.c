@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * start_process - start a new process
- * @d: data struct input
+ * run_pros - is the function to run the prosses
+ * @d: is the data
  * Return: void
  */
 
-void start_process(data *d)
+void run_pros(data *d)
 {
 	pid_t child_pid = fork();
 	int status = 0;
@@ -28,12 +28,12 @@ free:
 }
 
 /**
- * handler_sigint - Signal handler function
- * @signal: int input
+ * handl_signal - is the function that hundel the signal
+ * @signal: is the input
  * Return: void
  */
 
-void handler_sigint(int signal)
+void handl_signal(int signal)
 {
 	/*const char prompt[] = PROMPT;*/
 	(void)signal;
@@ -42,26 +42,26 @@ void handler_sigint(int signal)
 }
 
 /**
- * _exec - exectute cmd
- * @d: data struct input
+ * _execmd - is the function that exectute command
+ * @d: is the data
  * Return: void
  */
 
-void _exec(data *d)
+void _execmd(data *d)
 {
 	const char prompt[] = PROMPT;
 
-	signal(SIGINT, handler_sigint);
+	signal(SIGINT, handl_signal);
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			_printf(prompt);
 
-		read_cmd(d);
+		_read_cmd(d);
 		if (_strlen(d->cmd) != 0)
 		{
-			split(d, " ");
+			_splitstr(d, " ");
 			if (!exec_builtin(d))
 			{
 				_which(d);
@@ -71,7 +71,7 @@ void _exec(data *d)
 				}
 				else
 				{
-					start_process(d);
+					run_pros(d);
 				}
 			}
 			free_array(d->av);

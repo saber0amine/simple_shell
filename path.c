@@ -1,36 +1,36 @@
 #include "main.h"
 
 /**
- * _getenv - retrieves the value of an environment variable.
- * @name: string input
+ * _getenv - is the function that get the environment variable.
+ * @key: is the key of the variable
  * Return: value of an environment variable
  */
 
-char *_getenv(char *name)
+char *_getenv(char *key)
 {
 	int i = -1;
-	size_t name_len;
+	size_t key_len;
 
-	if (name == NULL || *name == '\0')
+	if (key == NULL || *key == '\0')
 		return (NULL);
 	if (environ == NULL)
 		return (NULL);
 
-	name_len = _strlen(name);
+	key_len = _strlen(key);
 
 	while (environ[++i])
 	{
-		if (!_strncmp(environ[i], name, name_len) && environ[i][name_len] == '=')
+		if (!_strncmp(environ[i], key, key_len) && environ[i][key_len] == '=')
 		{
-			return (environ[i] + name_len + 1);
+			return (environ[i] + key_len + 1);
 		}
 	}
 	return (NULL);
 }
 
 /**
- * _which - locate the executable file associated with a given command.
- * @d: string input
+ * _which - is the function that alocate the path of the command
+ * @d: is the data
  * Return: void
  */
 int _which(data *d)
@@ -72,50 +72,49 @@ step_out:
 }
 
 /**
- * create_new_entry - Initialize a new environment variable,
- *  or modify an existing one
- * @name: variable name
- * @value: variable value
+ * new_entry - is the function that create a new entry
+ * @key: is the key
+ * @value: is the value of the variabl
  * Return: void
  */
-char *create_new_entry(char *name, char *value)
+char *new_entry(char *key, char *value)
 {
-	size_t new_len = strlen(name) + strlen(value) + 2;
+	size_t new_len = strlen(key) + strlen(value) + 2;
 	char *new_entry = malloc(new_len);
 
 	if (new_entry == NULL)
 		return (NULL);
 
-	strcpy(new_entry, name);
+	strcpy(new_entry, key);
 	strcat(new_entry, "=");
 	strcat(new_entry, value);
 
 	return (new_entry);
 }
+
 /**
- * _new_environ - Initialize a new environment variable,
- *  or modify an existing one
- * @name: variable name
- * @value: variable value
+ * _new_environ - is the functio for the new environ
+ * @key: is the key
+ * @value: is the value of the variabl
  * Return: void
  */
-char **_new_environ(char *name, char *value)
+char **_new_environ(char *key, char *value)
 {
 	int env_len = 0, i = 0;
-	char *new_entry;
+	char *entry_n;
 	char **new_environ;
 
 	while (environ[env_len])
 		env_len++;
-	new_entry = create_new_entry(name, value);
-	if (new_entry == NULL)
+	entry_n = new_entry(key, value);
+	if (entry_n == NULL)
 		return (NULL);
-	new_environ = _getenv(name) ? malloc((env_len + 1) * sizeof(char *))
+	new_environ = _getenv(key) ? malloc((env_len + 1) * sizeof(char *))
 								: malloc((env_len + 2) * sizeof(char *));
 
 	if (!new_environ)
 	{
-		free(new_entry);
+		free(entry_n);
 		return (NULL);
 	}
 	for (i = 0; environ[i]; i++)
@@ -124,18 +123,18 @@ char **_new_environ(char *name, char *value)
 		if (!new_environ[i])
 		{
 			free_array(new_environ);
-			free(new_entry);
+			free(entry_n);
 			return (NULL);
 		}
-		if (strncmp(environ[i], name, strlen(name)) == 0
-		&& environ[i][strlen(name)] == '=')
-			strcpy(new_environ[i], new_entry);
+		if (strncmp(environ[i], key, strlen(key)) == 0
+		&& environ[i][strlen(key)] == '=')
+			strcpy(new_environ[i], entry_n);
 		else
 			strcpy(new_environ[i], environ[i]);
 	}
-	if (!_getenv(name))
+	if (!_getenv(key))
 	{
-		new_environ[env_len] = new_entry;
+		new_environ[env_len] = entry_n;
 		new_environ[env_len + 1] = NULL;
 	}
 	else
@@ -144,20 +143,20 @@ char **_new_environ(char *name, char *value)
 }
 
 /**
- * _setenv - Initialize a new environment variable, or modify an existing one
- * @d: to use the flag
- * @name: variable name
- * @value: variable value
+ * _setenv - is the function to set a new value to key
+ * @d: is the data
+ * @key: is the key
+ * @value: is the value of the variable
  * Return: void
  */
-int _setenv(data *d, char *name, char *value)
+int _setenv(data *d, char *key, char *value)
 {
 	char **new_environ;
 
-	if (!name || !value)
+	if (!key || !value)
 		return (-1);
 
-	new_environ = _new_environ(name, value);
+	new_environ = _new_environ(key, value);
 	if (!new_environ)
 		return (-1);
 	environ = new_environ;

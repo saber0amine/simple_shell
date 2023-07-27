@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * _printf - print a string to stander out put
- * @str: string input
+ * _printf - is the function to print a string
+ * @str: is the string to print
  * Return: void
  */
 void _printf(const char *str)
@@ -17,8 +17,8 @@ void _printf(const char *str)
 }
 
 /**
- * free_array - free an array of pointers
- * @array: array of pointers
+ * free_array - is the function that free arrays
+ * @array: is the array to free it
  * Return: void
  */
 void free_array(char **array)
@@ -38,12 +38,12 @@ void free_array(char **array)
 }
 
 /**
- * split - split a given string by a delimiter
- * @d: data struct input
- * @delim: string input
+ * _splitstr - is the function that split a string by delem
+ * @d: is the data
+ * @delim: the delemters
  * Return: void
  */
-void split(data *d, const char *delim)
+void _splitstr(data *d, const char *delim)
 {
 	char *token;
 	int ntoken = 0;
@@ -80,13 +80,13 @@ free:
 }
 
 /**
- * init_data - init data
- * @d: data struct input
- * @shell_name: string input
+ * initial_data - is the function that intialisate the data
+ * @d: is the data
+ * @shell_name: is the shell name where we work
  * Return: void
  */
 
-void init_data(data *d, const char *shell_name)
+void initial_data(data *d, const char *shell_name)
 {
 	d->cmd = NULL;
 	d->av = NULL;
@@ -96,11 +96,11 @@ void init_data(data *d, const char *shell_name)
 }
 
 /**
- * read_cmd - get the commend from the prompt and structure it into data struct
- * @d: data struct input
+ * _read_cmd - is the function that read the commandand storet
+ * @d: is the data
  * Return: void
  */
-void read_cmd(data *d)
+void _read_cmd(data *d)
 {
 	size_t n = 0;
 	ssize_t nread;
@@ -115,8 +115,7 @@ void read_cmd(data *d)
 	}
 
 	d->cmd[nread - 1] = '\0';
-	_trim(d->cmd);
-	/* replace hashtag with end of line we can also do it with strtok*/
+	_trim_str(d->cmd);
 	for (i = 0; d->cmd[i] != '\0'; i++)
 	{
 		if (d->cmd[0] == '#' || (d->cmd[i] == '#' && d->cmd[i - 1] == ' '))
@@ -125,5 +124,5 @@ void read_cmd(data *d)
 			break;
 		}
 	}
-	_trim(d->cmd);
+	_trim_str(d->cmd);
 }

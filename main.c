@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
- * main - init data
- * @argc: input size of @argv
- * @argv: input array of command line arguments
+ * main - is the main function that lance the program
+ * @argc: is number of @argv
+ * @argv: is an array of arguments
  * Return: Always 0.
  */
 int main(int argc, char **argv)
 {
 	data d;
 	(void)argc;
-	init_data(&d, argv[0]);
-	_exec(&d);
+	initial_data(&d, argv[0]);
+	_execmd(&d);
 
 	return (0);
 }

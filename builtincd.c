@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * change_dir - is the function that change the dir, pwd and oldpwd
+ * @target_dir: is dir where the user want cd to it
+ */
+
 void change_dir(char *target_dir)
 {
 	char *pwd = getcwd(NULL, 0);
@@ -37,7 +42,12 @@ void change_dir(char *target_dir)
 	free(pwd);
 }
 
-void builtin_cd(data *d)
+/**
+ * cd_builtin - is the function that get the dir that the user want it
+ * @d: is the data
+ */
+
+void cd_builtin(data *d)
 {
 	char *target_dir = NULL, *oldpwd = NULL;
 
