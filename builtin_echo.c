@@ -101,6 +101,7 @@ void echo_builtin(data *d)
 	if (d->av[1] == NULL)
 	{
 		write(STDOUT_FILENO, "\n", 1);
+		return;
 	}
 	if (_strncmp(d->av[0], "echo", 4) != 0)
 		return;
@@ -109,11 +110,13 @@ void echo_builtin(data *d)
 		if (d->av[1] == NULL)
 		{
 			write(STDOUT_FILENO, "\n", 1);
+			return;
 		}
 		if (_strncmp(d->av[1], "$", 1) == 0 || _strncmp(d->av[1], "$$", 2) == 0
 				|| _strncmp(d->av[1], "$?", 2) == 0)
 		{
 			echo_args(d->av[1], d->last_exit_status);
+			return;
 		}
 		for (i = 1; d->av[i] != NULL; i++)
 		{
